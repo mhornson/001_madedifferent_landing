@@ -3,47 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MADE DIFFERENT.</title>
+  <title>made different.</title>
   <style>
+    @font-face {
+      font-family: 'KollektifCustom';
+      src: url('./Kollektif.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: dark;
+      --bg: #070707;
+      --fg: #f3efe8;
+      --muted: rgba(243, 239, 232, 0.34);
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.1), transparent 28%),
+        radial-gradient(circle at 50% 60%, rgba(125, 125, 255, 0.08), transparent 34%),
+        var(--bg);
+    }
+
     body {
       min-height: 100vh;
-      background: #fff;
-      color: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
-      font-weight: 300;
+      color: var(--fg);
+      font-family: 'KollektifCustom', 'Helvetica Neue', Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    .hero {
-      text-align: center;
+
+    #wrap {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      cursor: none;
+      overflow: hidden;
     }
-    h1 {
-      font-size: clamp(2.5rem, 10vw, 6.5rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
+
+    #gl {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
-    .coming-soon {
-      margin-top: 1.25rem;
-      font-size: 0.8125rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
+
+    #hint {
+      position: absolute;
+      left: 50%;
+      bottom: 1.1rem;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: #86868b;
+      color: rgba(255, 255, 255, 0.14);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    @media (max-width: 720px) {
+      #wrap {
+        cursor: auto;
+      }
+
+      #hint {
+        letter-spacing: 0.18em;
+        font-size: 0.62rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <h1>MADE DIFFERENT.</h1>
-    <p class="coming-soon">Stay tuned</p>
+  <div id="wrap">
+    <canvas id="gl"></canvas>
+    <div id="hint"></div>
   </div>
+  <script src="./effects.js" defer></script>
 </body>
 </html>
