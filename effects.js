@@ -57,7 +57,7 @@
     }
 
     // Draw headline letter by letter so each can have its own Y offset
-    const headlineSize = Math.round(W * 0.115);
+    const headlineSize = Math.round(W * 0.0575);
     c.font = `800 ${headlineSize}px 'KollektifCustom','Helvetica Neue',Arial,sans-serif`;
     c.textAlign = 'left';
     c.textBaseline = 'middle';
