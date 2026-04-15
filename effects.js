@@ -1,6 +1,7 @@
 (function() {
   const wrap = document.getElementById('wrap');
   const canvas = document.getElementById('gl');
+  const cursor = document.getElementById('cursor');
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
   if (!gl) {
@@ -14,6 +15,8 @@
   let my = -1;
   let smx = 0.5;
   let smy = 0.5;
+  let cx = -100;
+  let cy = -100;
   let sceneTex = null;
   let fontReady = false;
 
@@ -34,15 +37,27 @@
     const r = wrap.getBoundingClientRect();
     mx = (e.clientX - r.left) / r.width;
     my = (e.clientY - r.top) / r.height;
+    cx = e.clientX;
+    cy = e.clientY;
+    cursor.style.opacity = '1';
   }
 
   wrap.addEventListener('mousemove', setMouseFromEvent);
   wrap.addEventListener('mouseleave', () => {
     mx = -1;
+    cursor.style.opacity = '0';
   });
   wrap.addEventListener('touchstart', e => {
     if (e.touches && e.touches[0]) setMouseFromEvent(e.touches[0]);
   }, { passive: true });
+
+  function updateCursor() {
+    if (mx < 0) {
+      return;
+    }
+
+    cursor.style.transform = `translate3d(${cx - 6}px, ${cy - 6}px, 0)`;
+  }
   wrap.addEventListener('touchmove', e => {
     if (e.touches && e.touches[0]) setMouseFromEvent(e.touches[0]);
   }, { passive: true });
@@ -258,6 +273,8 @@
       smx += (mx - smx) * 0.09;
       smy += (my - smy) * 0.09;
     }
+
+    updateCursor();
 
     if (!sceneTex) {
       return;
