@@ -365,7 +365,7 @@
     gl.uniform1i(uScene, 0);
     gl.uniform2f(uMouse, smx, smy);
     gl.uniform1f(uRadius, 0.15);
-    gl.uniform1f(uStrength, 0.01);
+    gl.uniform1f(uStrength, 0.006);
     gl.uniform1f(uBlur, 26.0);
     gl.uniform1f(uTime, t);
     gl.uniform1f(uAspect, W / H);
